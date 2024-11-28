@@ -1,4 +1,3 @@
-#TODO: Arrumar
 FROM maven:3.9.6-amazoncorretto-21-debian
 
 WORKDIR /opt/app
@@ -25,4 +24,4 @@ RUN mvn package -DskipTests
 EXPOSE 8080
 
 #Executando a aplicação
-ENTRYPOINT ["java", "-jar", "/opt/app/target/hexburger-0.0.1-SNAPSHOT.jar", "-Xms2048M", "-Xmx3072M"]
+ENTRYPOINT ["java", "-jar", "/opt/app/target/hexburger-cliente-0.0.1-SNAPSHOT.jar", "-Xms2048M", "-Xmx3072M"]
