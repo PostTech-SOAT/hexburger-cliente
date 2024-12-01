@@ -1,7 +1,7 @@
 # Default values for postgres-chart.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-chartName: hexburguer
+chartName: hexburguer-cliente
 
 # doesnt work if hpa is enabled
 replicaCount:
@@ -17,8 +17,8 @@ image:
   tag: default-value
 
 imagePullSecrets: []
-nameOverride: "hexburguer"
-fullnameOverride: "hexburguer-api"
+nameOverride: "hexburguer-cliente"
+fullnameOverride: "hexburguer-cliente-api"
 
 serviceAccount:
   create: true
@@ -58,7 +58,7 @@ ingress:
   hosts:
     - host: chart-example.local
       paths:
-        - path: /
+        - path: /v1/cliente
           pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
@@ -80,7 +80,7 @@ resources:
 livenessProbe:
   httpGet:
     path: /actuator/health/liveness
-    port: 8080
+    port: 28080
   initialDelaySeconds: 90
   periodSeconds: 90
   failureThreshould: 2
@@ -88,7 +88,7 @@ livenessProbe:
 readinessProbe:
   httpGet:
     path: /actuator/health/readiness
-    port: 8080
+    port: 28080
   initialDelaySeconds:
   failureThreshold: 3
   periodSeconds: 90

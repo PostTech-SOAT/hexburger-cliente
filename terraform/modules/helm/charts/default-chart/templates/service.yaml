@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "default-chart.fullname" . }}-service
+  name: {{ include "default-chart.fullname" . }}
   labels:
     {{- include "default-chart.labels" . | nindent 4 }}
 spec:

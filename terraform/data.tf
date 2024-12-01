@@ -12,7 +12,7 @@ data "kubernetes_service" "ingress_nginx" {
 }
 
 data "aws_secretsmanager_secret" "my_secret" {
-  name = "sm-rds-${var.application}-0"
+  name = "sm-rds-hexburger-0"
 }
 
 data "aws_secretsmanager_secret_version" "my_secret_version" {
