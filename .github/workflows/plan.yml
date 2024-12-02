@@ -14,6 +14,14 @@ env:
   ECR_REPOSITORY: hexburger-cliente
 
 jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: SonarQube - Quality Gate
+        uses: ./.github/quality/quality-gate
+
   unit_tests:
     runs-on: ubuntu-latest
     steps:
