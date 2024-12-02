@@ -25,6 +25,7 @@ jobs:
         uses: ./.github/quality/quality-gate
 
   unit_tests:
+    needs: quality
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
