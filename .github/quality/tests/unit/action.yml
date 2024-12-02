@@ -17,9 +17,3 @@ runs:
       run: |
         mvn test
       shell: bash
-
-    - name: Run code coverage
-      id: code-coverage
-      run: |
-        mvn -Dsonar.coverage.jacoco.xmlReportPaths=../app-it/target/site/jacoco-aggregate/jacoco.xml sonar:sonar -Pcoverage
-      shell: bash
