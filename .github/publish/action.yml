@@ -16,9 +16,6 @@ inputs:
   aws_account_id:
     description: "ID da conta da AWS"
     required: true
-  ecr_repository:
-    description: "Repositório do ECR"
-    required: true
 
 runs:
   using: composite
