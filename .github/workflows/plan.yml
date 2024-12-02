@@ -11,6 +11,7 @@ env:
   tfvars_file_name: deploy.hcl
   pr_number: ${{ github.event.number }}
   eks_cluster_name: hexburger-eks-cluster
+  ecr_repository: hexburger-cliente
 
 jobs:
   unit_tests:
@@ -59,3 +60,4 @@ jobs:
           terragrunt_version: ${{ env.terragrunt_version }}
           tfvars_file_name: ${{ env.tfvars_file_name }}
           eks_cluster_name: ${{ env.eks_cluster_name }}
+          ecr_repository: ${{ env.ecr_repository }}
