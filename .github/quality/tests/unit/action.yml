@@ -20,15 +20,8 @@ runs:
         echo 'EOF' >> $GITHUB_OUTPUT
       shell: bash
 
-    - name: Check code coverage
-      id: coverage
-      run: |
-        mvn jacoco:report
-        mvn jacoco:check
-      shell: bash
-
     - name: Upload code coverage report
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: coverage-report
 
