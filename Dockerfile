@@ -1,4 +1,3 @@
-#TODO: Arrumar
 FROM maven:3.9.6-amazoncorretto-21-debian
 
 WORKDIR /opt/app
