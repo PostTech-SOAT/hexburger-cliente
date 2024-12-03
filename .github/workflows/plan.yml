@@ -84,7 +84,7 @@ jobs:
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
   publish_ecr:
-    needs: unit_tests
+    needs: sonar
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
