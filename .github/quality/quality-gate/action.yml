@@ -31,6 +31,15 @@ runs:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
+    - name: Download coverage report
+      uses: actions/download-artifact@v4
+      with:
+        name: coverage-report
     - name: Build and analyze with SonarQube
-      run: mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=PostTech-SOAT_hexburger-cliente -Dsonar.organization=postech-soat-hexburguer -Dsonar.host.url=https://sonarcloud.io -Dsonar.token=${{ inputs.sonarqube_token }} -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+      run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        -Dsonar.projectKey=PostTech-SOAT_hexburger-cliente
+        -Dsonar.organization=postech-soat-hexburguer
+        -Dsonar.host.url=https://sonarcloud.io
+        -Dsonar.token=${{ inputs.sonarqube_token }}
+        -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
       shell: bash
