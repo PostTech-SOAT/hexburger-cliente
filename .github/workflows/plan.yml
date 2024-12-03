@@ -24,7 +24,7 @@ jobs:
       - name: SonarQube - Quality Gate
         uses: ./.github/quality/quality-gate
         with:
-          sonar_token: ${{ secrets.SONAR_TOKEN }}
+          sonarqube_token: ${{ secrets.SONAR_TOKEN }}
 
   unit_tests:
     needs: quality
