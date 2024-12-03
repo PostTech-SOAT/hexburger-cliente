@@ -17,16 +17,6 @@ env:
 
 jobs:
 
-  unit_tests:
-    needs: quality
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Unit tests - Code coverage
-        uses: ./.github/quality/tests/unit
-        with:
-          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
   quality:
     runs-on: ubuntu-latest
     steps:
@@ -38,6 +28,17 @@ jobs:
         uses: ./.github/quality/quality-gate
         with:
           sonarqube_token: ${{ secrets.SONAR_TOKEN }}
+
+  unit_tests:
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Unit tests - Code coverage
+        uses: ./.github/quality/tests/unit
+        with:
+          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
 
   publish_ecr:
     needs: unit_tests
