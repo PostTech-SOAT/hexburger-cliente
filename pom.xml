@@ -30,6 +30,9 @@
         <java.version>21</java.version>
         <sonar.organization>postech-soat-hexburguer</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.coverage.jacoco.xmlReportPaths>
+            ../hexburger-cliente/target/site/jacoco/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
     </properties>
     <dependencies>
 
