@@ -32,5 +32,5 @@ runs:
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
     - name: Build and analyze with SonarQube
-      run: mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=PostTech-SOAT_hexburger-cliente -Dsonar.organization=postech-soat-hexburguer -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      run: mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=PostTech-SOAT_hexburger-cliente -Dsonar.organization=postech-soat-hexburguer -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ inputs.sonarqube_token }}
       shell: bash
