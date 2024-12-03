@@ -20,8 +20,8 @@ COPY src ./src
 #Buildando a aplicação
 RUN mvn package -DskipTests
 
-#Expondo a porta 8080
-EXPOSE 8080
+#Expondo a porta 28080
+EXPOSE 28080
 
 #Executando a aplicação
 ENTRYPOINT ["java", "-jar", "/opt/app/target/hexburger-cliente-0.0.1-SNAPSHOT.jar", "-Xms2048M", "-Xmx3072M"]
