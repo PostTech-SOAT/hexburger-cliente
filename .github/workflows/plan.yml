@@ -41,7 +41,7 @@ jobs:
           sonarqube_token: ${{ secrets.SONAR_TOKEN }}
 
   publish_ecr:
-    needs: unit_tests
+    needs: quality
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
