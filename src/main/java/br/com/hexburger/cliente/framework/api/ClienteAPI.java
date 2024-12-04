@@ -43,7 +43,7 @@ public class ClienteAPI {
         }
     }
 
-    @GetMapping("/{cpf}")
+    @GetMapping("/{cpf}")//
     @Operation(summary = "Buscar um cliente por CPF")
     public ResponseEntity<ClienteDTO> buscarCliente(@PathVariable @Parameter(description = "CPF do cliente", required = true, schema = @Schema(type = "string", example = "12345678901")) String cpf) {
         try {
