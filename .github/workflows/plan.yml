@@ -71,13 +71,9 @@ jobs:
         with:
           name: coverage-report
 
-      - name: Extract artifactId from pom.xml
-        id: extract-artifact-id
-        run: echo "ARTIFACT_ID=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)" >> $GITHUB_ENV
-
       - name: Build and analyze with SonarQube
         run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-          -Dsonar.projectKey=${{ env.ARTIFACT_ID }}
+          -Dsonar.projectKey=PostTech-SOAT_hexburger-cliente
           -Dsonar.organization=postech-soat-hexburguer
           -Dsonar.host.url=https://sonarcloud.io
           -Dsonar.token=${{ secrets.SONAR_TOKEN }}
