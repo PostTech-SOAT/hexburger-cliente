@@ -16,71 +16,32 @@ env:
   SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 jobs:
-  build:
+
+  unit_tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
+      - name: Unit tests - Code coverage
+        uses: ./.github/quality/tests/unit
         with:
-          distribution: 'temurin'
-          java-version: '21'
+          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
 
-      - name: Build with Maven
-        run: mvn clean install -DskipTests
-  test:
-    needs: build
+  quality:
+    needs: unit_tests
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
+      - uses: actions/checkout@v3
         with:
-          distribution: 'temurin'
-          java-version: '21'
+          fetch-depth: 0
 
-      - name: Run tests
-        run: mvn test jacoco:report -Dmaven.javadoc.skip=true
-
-      - name: Upload coverage report
-        uses: actions/upload-artifact@v4
+      - name: SonarQube - Quality Gate
+        uses: ./.github/quality/quality-gate
         with:
-          name: coverage-report
-          path: target/site/jacoco/jacoco.xml
-
-  sonar:
-    runs-on: ubuntu-latest
-    needs: test
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-
-      - name: Download coverage report
-        uses: actions/download-artifact@v4
-        with:
-          name: coverage-report
-
-      - name: Build and analyze with SonarQube
-        run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-          -Dsonar.projectKey=PostTech-SOAT_hexburger-cliente
-          -Dsonar.organization=postech-soat-hexburguer
-          -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.token=${{ secrets.SONAR_TOKEN }}
-          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+          sonarqube_token: ${{ secrets.SONAR_TOKEN }}
 
   publish_ecr:
-    needs: sonar
+    needs: quality
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
